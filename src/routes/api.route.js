@@ -20,6 +20,5 @@ apiRouter.get("/upcoming", upcoming);
 apiRouter.get("/movie-details/:movie_id", movieDetails);
 apiRouter.get("/credits/:movie_id", credits);
 apiRouter.get("/trailer/:movie_id", trailer);
-apiRouter.get("/favourites/:movie_id", favorites);
 
 export default apiRouter;
