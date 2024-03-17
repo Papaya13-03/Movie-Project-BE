@@ -11,10 +11,12 @@ const app = express();
 const port = process.env.PORT | 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors({
-  origin: "https://movie-project-fe.vercel.app/",
-  methods: ["GET", "POST", "PUT", "CREATE"]
-}));
+app.use(
+  cors({
+    origin: "https://movie-project-fe.vercel.app/",
+    methods: ["GET", "POST", "PUT", "CREATE"],
+  })
+);
 
 app.use("/auth", userRouter);
 app.use("/api", apiRouter);
