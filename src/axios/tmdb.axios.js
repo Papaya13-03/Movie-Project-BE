@@ -4,9 +4,9 @@ const axiosCall = async (url, method) => {
     url,
     method,
     headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
-    }
+      accept: "application/json",
+      Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+    },
   };
   var response = {};
   await axios(opts)
@@ -45,18 +45,33 @@ const upcoming = async (page, language = "en-US") => {
 };
 
 const movieDetails = async (movie_id) => {
-    const url = `https://api.themoviedb.org/3/movie/${movie_id}`;
-    return await axiosCall(url, "GET");
-}
+  const url = `https://api.themoviedb.org/3/movie/${movie_id}`;
+  return await axiosCall(url, "GET");
+};
 
 const credits = async (movie_id) => {
-  const url = `https://api.themoviedb.org/3/movie/${movie_id}/credits`
+  const url = `https://api.themoviedb.org/3/movie/${movie_id}/credits`;
   return await axiosCall(url, "GET");
-}
+};
 
 const trailer = async (movie_id) => {
-    const url = `https://api.themoviedb.org/3/movie/${movie_id}/videos`
-    return await axiosCall(url, "GET");
-}
+  const url = `https://api.themoviedb.org/3/movie/${movie_id}/videos`;
+  return await axiosCall(url, "GET");
+};
 
-export { getTrending, nowPlaying, mostPopular, topRated, upcoming, movieDetails, credits, trailer };
+const search = async (search) => {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${search}`;
+  return await axiosCall(url, "GET");
+};
+
+export {
+  getTrending,
+  nowPlaying,
+  mostPopular,
+  topRated,
+  upcoming,
+  movieDetails,
+  credits,
+  trailer,
+  search,
+};

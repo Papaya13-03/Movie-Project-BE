@@ -67,15 +67,33 @@ const credits = async (req, res) => {
     .credits(movie_id)
     .then((response) => responseHandler.ok(res, response))
     .catch((error) => responseHandler.error(res));
-}
+};
 
 const trailer = async (req, res) => {
-    const { movie_id } = req.params;
-    if (!movie_id) return responseHandler.badRequest(res, "Missing movie id!");
-    await tmdb
-      .trailer(movie_id)
-      .then((response) => responseHandler.ok(res, response))
-      .catch((error) => responseHandler.error(res));
-}
+  const { movie_id } = req.params;
+  if (!movie_id) return responseHandler.badRequest(res, "Missing movie id!");
+  await tmdb
+    .trailer(movie_id)
+    .then((response) => responseHandler.ok(res, response))
+    .catch((error) => responseHandler.error(res));
+};
 
-export { getTrending, nowPlaying, popular, topRated, upcoming, movieDetails, credits, trailer };
+const search = async (req, res) => {
+  const { search } = req.query;
+  await tmdb
+    .search(search)
+    .then((response) => responseHandler.ok(res, response))
+    .catch((error) => responseHandler.error(res));
+};
+
+export {
+  getTrending,
+  nowPlaying,
+  popular,
+  topRated,
+  upcoming,
+  movieDetails,
+  credits,
+  trailer,
+  search,
+};

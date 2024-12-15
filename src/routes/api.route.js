@@ -7,7 +7,8 @@ import {
   popular,
   topRated,
   upcoming,
-  trailer
+  trailer,
+  search,
 } from "../controllers/tmdb.controller.js";
 
 const apiRouter = express.Router();
@@ -20,5 +21,6 @@ apiRouter.get("/upcoming", upcoming);
 apiRouter.get("/movie-details/:movie_id", movieDetails);
 apiRouter.get("/credits/:movie_id", credits);
 apiRouter.get("/trailer/:movie_id", trailer);
+apiRouter.get("/movies", search);
 
 export default apiRouter;
