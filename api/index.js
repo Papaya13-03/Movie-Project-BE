@@ -5,27 +5,27 @@ import mongoose from "mongoose";
 import cors from "cors";
 import apiRouter from "../src/routes/api.route.js";
 import userRouter from "../src/routes/user.route.js";
+import commentsRouter from "../src/routes/comment.route.js";
+import auth from "../src/middlewares/auth.middleware.js";
 
 dotenv.config();
 const app = express();
+console.log(process.env.PORT);
 const port = process.env.PORT | 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
-app.options('*', (req, res) => {
+app.options("*", (req, res) => {
   res.status(200).json("OK");
-})
+});
 
-app.use("/auth", userRouter);
+app.use("/user", userRouter);
 app.use("/api", apiRouter);
+app.use("/comments", auth, commentsRouter);
 
 app.get("/", (req, res) => {
   res.json("Welcome to server nottttttt!");
-});
-
-app.get("/test", (req, res) => {
-  res.json("You are in test");
 });
 
 mongoose

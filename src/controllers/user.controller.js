@@ -1,6 +1,6 @@
 import responseHandler from "../handlers/response.handler.js";
 import User from "../models/user.model.js";
-import jsonwebtoken from "jsonwebtoken"
+import jsonwebtoken from "jsonwebtoken";
 
 const signup = async (req, res) => {
   const { username, password, nickname } = req.body;
@@ -14,7 +14,7 @@ const signup = async (req, res) => {
   user.setPassword(password);
   await user.save();
 
-  const token = jsonwebtoken.sign({id:user._id}, process.env.JWT_SECRET_KEY);
+  const token = jsonwebtoken.sign({ id: user._id }, process.env.JWT_SECRET_KEY);
   return responseHandler.created(res, {
     token: token,
     msg: "Created!",
@@ -31,7 +31,7 @@ const signin = async (req, res) => {
   if (!user.validPassword(password))
     return responseHandler.badRequest(res, { msg: "Wrong password!" });
 
-  const token = jsonwebtoken.sign({id: user._id}, process.env.JWT_SECRET_KEY);
+  const token = jsonwebtoken.sign({ id: user._id }, process.env.JWT_SECRET_KEY);
   return responseHandler.ok(res, {
     token: token,
     msg: "ok",
@@ -49,5 +49,9 @@ const changePassword = async (req, res) => {
   return responseHandler.ok(res, { msg: "Password changed!" });
 };
 
+const getUser = async (req, res) => {
+  // console.log(req.user);
+  return responseHandler.ok(res, req.user);
+};
 
-export {signin, signup, changePassword};
+export { signin, signup, changePassword, getUser };
