@@ -8,6 +8,7 @@ import userRouter from "../src/routes/user.route.js";
 import commentsRouter from "../src/routes/comment.route.js";
 import auth from "../src/middlewares/auth.middleware.js";
 import favourtieRouter from "../src/routes/favourite.js";
+import * as event from "events";
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ console.log(process.env.PORT);
 const port = process.env.PORT | 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+event.EventEmitter.prototype._maxListeners = 100;
 
 app.use(cors());
 app.options("*", (req, res) => {

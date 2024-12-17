@@ -26,4 +26,10 @@ const getFavourite = async (req, res) => {
   return responseHandler.ok(res, favourite.length > 0);
 };
 
-export { addFavourite, getFavourite };
+const getAllFavourite = async (req, res) => {
+  const userId = req.user._id;
+  const favourite = await Favourite.find({ userId });
+  return responseHandler.ok(res, favourite);
+};
+
+export { addFavourite, getFavourite, getAllFavourite };
