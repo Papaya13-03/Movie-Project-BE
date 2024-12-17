@@ -7,6 +7,7 @@ import apiRouter from "../src/routes/api.route.js";
 import userRouter from "../src/routes/user.route.js";
 import commentsRouter from "../src/routes/comment.route.js";
 import auth from "../src/middlewares/auth.middleware.js";
+import favourtieRouter from "../src/routes/favourite.js";
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.options("*", (req, res) => {
 app.use("/user", userRouter);
 app.use("/api", apiRouter);
 app.use("/comments", auth, commentsRouter);
+app.use("/favourite", auth, favourtieRouter);
 
 app.get("/", (req, res) => {
   res.json("Welcome to server nottttttt!");
